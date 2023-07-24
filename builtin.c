@@ -1,72 +1,90 @@
 #include "shell.h"
-#include <stdio.h>
-#include <string.h>
 
 /**
-* exitShell - exits the shell
-* @info: structure containing potential arguments. Used to maintain
-*        constant function prototype.
-*
-* Return: Always 1 (to indicate the shell should exit).
-*/
-int exitShell(info_t *info)
+ * _atoi - converts string to an integer
+ * @ntr: string to be converted
+ * Return: converted integer value or -1
+ */
+int _atoi(char *ntr)
 {
-if (info->argc > 1)
-{
-int exitStatus = convertToExitStatus(info->argv[1]);
-if (exitStatus < 0)
-{
-printErrorMessage(info, "Illegal number: ");
-printString(info->argv[1]);
-printCharacter('\n');
-}
-else
-{
-info->exitStatus = exitStatus;
-}
-}
+	int i = 0, n = 0;
 
-return (1);
-}
+	if (ntr[i] == '+')
+		i++;
 
+	while (ntr[i])
+	{
+		if (ntr[i] < '0' || ntr[i] > '9')
+			return (-1);
+
+		n = (n * 10) + (ntr[i] - '0');
+		i++;
+	}
+
+	return (n);
+}
 /**
-* changeDirectory - changes the current working directory
-* @info: structure containing potential arguments. Used to maintain
-*        constant function prototype.
-*
-* Return: Always 0.
-*/
-int changeDirectory(info_t *info)
+ * handle_builtin - handle builtin commands
+ * @tokens: tokens
+ * @buffer: buffer
+ * Return: int
+ */
+int handle_builtin(char **tokens, char *buffer)
 {
-char buffer[1024];
-char *currentDir, *newDir;
+	if (_strcmp(tokens[0], "exit") == 0)
+		return (exit_func(tokens, buffer));
+	else if (_strcmp(tokens[0]; "env") == 0)
+		return (exit_func());
+	/*
+	 * else if (_strcmp(tokens[0], "setenv") == 0)
+	 * return (_setenv());
+	 * else if (_strcmp(tokens[0], "unsetenv") == 0)
+	 * return (_unsetenv(tokens[1]));
+	 */
+	else
+		return (-1);
+}
+/**
+ * env_func - get the environ
+ *
+ * return: always 0
+ */
+int env_func(void)
+{
+	int i;
 
-if (info->argc < 2)
-{
-/* No arguments provided, change to HOME directory */
-newDir = getEnvironmentVariable(info, "HOME");
-changeDir(newDir ? newDir : "/");
-}
-else if (compareStrings(info->argv[1], "-") == 0)
-{
-/* Change to the previous working directory */
-newDir = getEnvironmentVariable(info, "OLDPWD");
-changeDir(newDir ? newDir : "/");
-}
-else
-{
-/* Change to the specified directory */
-currentDir = getCurrentWorkingDirectory(buffer, sizeof(buffer));
-if (!currentDir)
-{
-perror("getCurrentWorkingDirectory");
-return (0);
-}
+	for (i = 0; environ[i]; i++)
+		_puts(environ[i]);
 
-changeDir((newDir = getEnvironmentVariable(info, "PWD")) ? newDir : "/");
-setEnvironmentVariable(info, "OLDPWD", currentDir);
-setEnvironmentVariable(info, "PWD", getCurrentWorkingDirectory(buffer, sizeof(buffer)));
+	return (0);
 }
+/**
+ * exit_func - does the exiting
+ * @tokens: tokens
+ * @buffer: buffer
+ * Return: integer
+ */
+int exit_func(char **tokens, char *buffer)
+{
+	int i = 0;
+	int existatus = 0;
 
-return (0);
+	while (tokens[i])
+		i++;
+	if (i == 0)
+	{
+		free_av(tokens);
+		free(buffer);
+		exit(0);
+	}
+	if (_atoi(tokens[1] == -1)
+	{
+	fprintf(stderr, "./hsh: 1: exit: ILLegal number: %S\n", tokens[1]);
+			return (2);
+	}
+	existatus = atoi(tokens[1];
+	free_av(tokens);
+	free(buffer);
+	exit(existatus);
+
 }
