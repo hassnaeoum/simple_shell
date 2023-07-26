@@ -28,7 +28,7 @@ int check_spaces_around_command(char *input);
 int check_spaces_tabs(char *str);
 int execute_cmd(char **av, char *buff);
 char *get_environment_variable(char *name);
-char* find_command_path(char *command);
+char *find_command_path(char *command);
 size_t _string_length(const char *str);
 char *_string_concatenate(char *dest, char *src);
 char *_get_cmp(char *name);
