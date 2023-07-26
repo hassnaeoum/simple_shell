@@ -16,6 +16,7 @@ int _atoi(char *ntr);
 int env_func(void);
 int exit_func(char **tokens, char *buffer);
 int handle_builtin(char **tokens, char *buffer);
+void free_av(char **av);
 void free_tokens(char **tokens);
 void tokenize_input(char *buffer, char **tokens);
 void _puts(char *str);
