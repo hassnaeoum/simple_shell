@@ -29,9 +29,9 @@ free(buffer);
 exit(status);
 }
 if (*buffer == '\n' || (*buffer == ' ' || *buffer == '\t'))
-tokenize(buffer, tokens);
-status = excute_cmd(tokens, buffer);
-free_av(tokens);
+tokenize_input(buffer, tokens);
+status = execute_cmd(tokens, buffer);
+free_tokens(tokens);
 free(buffer);
 buffer = NULL;
 buffer_size = 0;
