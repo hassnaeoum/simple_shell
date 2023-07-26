@@ -72,7 +72,7 @@ int exit_func(char **tokens, char *buffer)
 		i++;
 	if (i == 1)
 	{
-		free_av(tokens);
+		free_tokens(tokens);
 		free(buffer);
 		exit(0);
 	}
@@ -82,7 +82,7 @@ int exit_func(char **tokens, char *buffer)
 		return (2);
 	}
 	existatus = atoi(tokens[1]);
-	free_av(tokens);
+	free_tokens(tokens);
 	free(buffer);
 	exit(existatus);
 }

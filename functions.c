@@ -17,13 +17,13 @@ i++;
 }
 
 /**
-* execute_command - executes commands
+* execute_cmd - executes commands
 *
 * @tokens: array of tokens
 * @buffer: input buffer
 * Return: exit_status
 */
-int execute_command(char **tokens, char *buffer)
+int execute_cmd(char **tokens, char *buffer)
 {
 pid_t pid;
 char *cmd_path = NULL;
@@ -71,7 +71,7 @@ return (exit_status);
 char *get_environment_variable(char *name)
 {
 int i = 0;
-size_t name_len = _strlen(name);
+size_t name_len = _string_length(name);
 
 for (; environ[i]; i++)
 {
@@ -97,11 +97,11 @@ path = get_environment_variable("PATH");
 if (path)
 {
 path_copy = _string_duplicate(path);
-command_length = _strlen(command);
+command_length = _string_length(command);
 path_token = strtok(path_copy, ":");
 while (path_token)
 {
-directory_length = _strlen(path_token);
+directory_length = _string_length(path_token);
 command_path = malloc(command_length + directory_length + 2);
 _string_copy(command_path, path_token);
 _string_concatenate(command_path, "/");
@@ -144,9 +144,8 @@ buffer_copy = _string_duplicate(buffer);
 token = strtok(buffer_copy, delim);
 for (count = 0; token; count++)
 {
-token_len = _strlen(token);
+token_len = _string_length(token);
 tokens[count] = malloc(sizeof(char *) * (token_len + 1));
-_strncpy(tokens[count], token, token_len + 1);
 token = strtok(NULL, delim);
 }
 free(buffer_copy);
