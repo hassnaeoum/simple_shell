@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stddef.h>
+#include <stdlib.h> /* Include the necessary header for malloc*/
 #include "shell.h"
 /**
 * _string_length - calculates the length of a string.
@@ -20,21 +21,21 @@ return (length);
 * @src: source string
 * Return: Pointer to the concatenated string.
 */
-char *_string_concatenate(const char *dest, const char *src)
+char *_string_concatenate(char *dest, char *src)
 {
-size_t dest_len = _string_length(dest);
-size_t src_len = _string_length(src);
-size_t total_len = dest_len + src_len + 1;
-char *result = (char *)malloc(total_len * sizeof(char));
-if (result == NULL)
-return (NULL);
-size_t i, j;
-for (i = 0; i < dest_len; i++)
-result[i] = dest[i];
-for (j = 0; j < src_len; j++)
-result[i + j] = src[j];
-result[i + j] = '\0';
-return (result);
+int i = 0, j = 0;
+while (dest[i] != '\0')
+{
+i++;
+}
+while (src[j] != '\0')
+{
+dest[i] = src[j];
+i++;
+j++;
+}
+dest[i] = '\0';
+return (dest);
 }
 /**
 * _string_copy - copies str to another
@@ -78,7 +79,10 @@ void *_memory_copy(void *dest, const void *src, size_t n)
 {
 char *d = (char *)dest;
 const char *s = (const char *)src;
-for (size_t i = 0; i < n; i++)
+size_t i;
+for (i = 0; i < n; i++)
+{
 d[i] = s[i];
+}
 return (dest);
 }
