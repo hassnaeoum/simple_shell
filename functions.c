@@ -96,17 +96,17 @@ struct stat buffer;
 path = get_environment_variable("PATH");
 if (path)
 {
-path_copy = _strdup(path);
+path_copy = _string_duplicate(path);
 command_length = _strlen(command);
 path_token = strtok(path_copy, ":");
 while (path_token)
 {
 directory_length = _strlen(path_token);
 command_path = malloc(command_length + directory_length + 2);
-_strcpy(command_path, path_token);
-_strcat(command_path, "/");
-_strcat(command_path, command);
-_strcat(command_path, "\0");
+_string_copy(command_path, path_token);
+_string_concatenate(command_path, "/");
+_string_concatenate(command_path, command);
+_string_concatenate(command_path, "\0");
 if (stat(command_path, &buffer) == 0)
 {
 free(path_copy);
@@ -140,7 +140,7 @@ const char *delim = " \t\n";
 char *token = NULL;
 int count = 0;
 char *buffer_copy = NULL;
-buffer_copy = _strdup(buffer);
+buffer_copy = _string_duplicate(buffer);
 token = strtok(buffer_copy, delim);
 for (count = 0; token; count++)
 {
