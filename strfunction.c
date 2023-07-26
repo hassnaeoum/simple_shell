@@ -7,7 +7,7 @@
 * @str: pointer to a string.
 * Return: Length of the string.
 */
-size_t _string_length(char *str)
+size_t _string_length(const char *str)
 {
 size_t length = 0;
 while (str[length] != '\0')
