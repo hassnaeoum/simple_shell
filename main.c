@@ -1,51 +1,41 @@
 #include "shell.h"
-
 /**
- * main - entry point
- * @argc: arg count
- * @argv: arg vector
- *
- * Return: 0 on success, 1 on error
- */
-
-int main(int argc, char **argv)
+* main - Entry point
+*
+* Return: Always 0
+*/
+int main(void)
 {
-info_t shell_info[] = {INFO_INIT};
-int fd = 2;
-
-/* Some arbitrary manipulation with the file descriptor 'fd' */
-/* (This part may be altered based on the purpose of the original code) */
-asm ("mov %1, %0\n\t"
-"add $3, %0"
-: "=r" (fd)
-: "r" (fd));
-
-if (argc == 2)
+bool run = true;
+int status = 0;
+char *buffer = NULL;
+size_t buffer_size = 0;
+ssize_t rn;
+char *tokens[100] = {0};
 {
-fd = open(argv[1], O_RDONLY);
-if (fd == -1)
+if (isatty(STDIN_FILENO))
+write(1, "#cisfun$ ", 9);
+else
+run = false;
+rn = getline(&buffer, &buffer_size, stdin);
+if (rn == -1)
 {
-if (errno == EACCES)
-exit(126);
-if (errno == ENOENT)
+if (!isatty(STDIN_FILENO))
 {
-_eputs(argv[0]);
-_eputs(": 0: Can't open ");
-_eputs(argv[1]);
-_eputchar('\n');
-_eputchar(BUF_FLUSH);
-exit(127);
+free(buffer);
 }
-return (EXIT_FAILURE);
+perror("getline");
+free(buffer);
+exit(status);
 }
-shell_info->readfd = fd;
-}
-
-/* Function calls are included but details are not provided */
-/* to create a distinct version while retaining the same structure. */
-create_and_populate_env_list(shell_info);
-read_shell_history(shell_info);
-execute_shell(shell_info, argv);
-
-return (EXIT_SUCCESS);
+if (*buffer == '\n' || (*buffer == ' ' || *buffer == '\t'))
+tokenize(buffer, tokens);
+status = excute_cmd(tokens, buffer);
+free_av(tokens);
+free(buffer);
+buffer = NULL;
+buffer_size = 0;
+} while (run);
+free(buffer);
+return (status);
 }
