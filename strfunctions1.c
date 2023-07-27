@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * _stringcopy - function that copies a string
+ * _strncpy - function that copies a string
  *
  * @dest: destination string
  * @n: integer that specify the max num of char to be copied.
  * @src: source srting
  * Return: dest
  */
-char *_stringcopy(char *dest, char *src, int n)
+char *_strncpy(char *dest, char *src, int n)
 {
 	int i;
 

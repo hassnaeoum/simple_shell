@@ -12,7 +12,7 @@ char *buffer = NULL;
 size_t buffer_size = 0;
 ssize_t rn;
 char *tokens[100] = {0};
-{
+
 if (isatty(STDIN_FILENO))
 write(1, "#cisfun$ ", 9);
 else
@@ -29,13 +29,13 @@ free(buffer);
 exit(status);
 }
 if (*buffer == '\n' || (*buffer == ' ' || *buffer == '\t'))
-tokenize_input(buffer, tokens);
+tokenize(buffer, tokens);
 status = execute_cmd(tokens, buffer);
-free_tokens(tokens);
+free_av(tokens);
 free(buffer);
 buffer = NULL;
 buffer_size = 0;
-} while (run);
+} 
 free(buffer);
 return (status);
 }
