@@ -64,11 +64,11 @@ free(cmd_path);
 return (exit_status);
 }
 /**
-* get_environment_variable - get the value of an environment variable
-* @name: name of the environment variable
-* Return: value of the environment variable or NULL if not found
+* _getenv - get the value of an env variable
+* @name: name of the env variable
+* Return: value of the env variable or NULL if not found
 */
-char *get_environment_variable(char *name)
+char *_getenv(char *name)
 {
 int i = 0;
 size_t name_len = _string_length(name);
@@ -93,7 +93,7 @@ char *path, *path_copy, *path_token, *command_path;
 int command_length, directory_length;
 struct stat buffer;
 
-path = get_environment_variable("PATH");
+path = _getenv("PATH");
 if (path)
 {
 path_copy = _string_duplicate(path);
