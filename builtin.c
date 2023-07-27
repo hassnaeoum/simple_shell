@@ -73,7 +73,7 @@ while (tokens[i])
 i++;
 if (i == 1)
 {
-free_tokens(tokens);
+free_av(tokens);
 free(buffer);
 exit(0);
 }
@@ -83,7 +83,7 @@ fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", tokens[1]);
 return (2);
 }
 existatus = atoi(tokens[1]);
-free_tokens(tokens);
+free_av(tokens);
 free(buffer);
 exit(existatus);
 }

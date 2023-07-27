@@ -1,29 +1,29 @@
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h> /* Include the necessary header for malloc*/
 #include "shell.h"
 /**
-* _strlen - calculates the length of a string.
+*  _strlen -  calculates the length of a string.
 * @str: pointer to a string.
-* Return: Length of the string.
+* Return: i.
 */
 int _strlen(char *str)
 {
 int i = 0;
+
 while (str[i])
 i++;
 return (i);
 }
 /**
-* _strcat  - concatenate two strings
+* _strcat - concatenate two strings
 *
 * @dest: destination string
-* @src: source string
-* Return: Pointer to the concatenated string.
+* @src: source srting
+* Return: dest
 */
 char *_strcat(char *dest, char *src)
 {
-int i = 0, j = 0;
+int i = 0;
+int j = 0;
+
 while (dest[i] != '\0')
 {
 i++;
@@ -38,60 +38,63 @@ dest[i] = '\0';
 return (dest);
 }
 /**
-* _strcpy - copies str to another
+* _strcpy - copys str to another
 * @dest: destination string
-* @src: the string that we're going to copy
-* Return: Pointer to the destination string.
+* @src: the str that we gonna copy
+*
+* Return: the pointer to dst
 */
+
 char *_strcpy(char *dest, char *src)
 {
 int i = 0;
+
 while (*(src + i))
 {
 *(dest + i) = *(src + i);
 i++;
 }
 *(dest + i) = '\0';
+
 return (dest);
 }
 /**
-* _strdup- duplicate str and return a pointer to newly allocated str
-* @str: pointer to be duplicated.
-* Return: Pointer to the duplicated string or NULL if memory allocation fails.
+* _strdup - duplicate str and returns a ptr to newly allocated str.
+* @str: ptr to be duplicated.
+* Return: NULL or str1.
 */
 char *_strdup(char *str)
 {
-	char *str1;
-	unsigned int len;
+char *str1;
+unsigned int len;
 
-	if (str == 0)
-	{
-		return (NULL);
-	}
-	len = _strlen(str) + 1;
-	str1 = (char *)malloc(sizeof(char) * len);
-	if (str1 == 0)
-	{
-		return (NULL);
-	}
-	_memcpy(str1, str, len);
-	return (str1);
+if (str == 0)
+{
+return (NULL);
+}
+len = _strlen(str) + 1;
+str1 = (char *)malloc(sizeof(char) * len);
+if (str1 == 0)
+{
+return (NULL);
+}
+_memcpy(str1, str, len);
+return (str1);
 }
 /**
-* _memory_copy - function that copies memory area.
+* _memcpy - function that copies memory area.
 * @dest: destination memory area.
-* @src: source memory area.
+* @src: source memory ares.
 * @n: number of bytes to be copied.
-* Return: Pointer to the destination memory area.
+* Return: dest.
 */
-void *_memory_copy(void *dest, const void *src, int n)
+char *_memcpy(char *dest, char *src, unsigned int n)
 {
-char *d = (char *)dest;
-const char *s = (const char *)src;
-size_t i;
+unsigned int i;
+
 for (i = 0; i < n; i++)
 {
-d[i] = s[i];
+dest[i] = src[i];
 }
 return (dest);
 }

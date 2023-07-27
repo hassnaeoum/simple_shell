@@ -47,7 +47,7 @@ if (pid == 0)
 if (execve(cmd, av , environ) == -1)
 {
 perror("execve");
-free_av;
+free_av(av);
 free(buffer);
 exit(2);
 }
