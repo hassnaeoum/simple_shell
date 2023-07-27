@@ -45,9 +45,9 @@ int handle_builtin(char **tokens, char *buffer)
 		return (-1);
 }
 /**
- * env_func - get the environ
+ * env_func - get the environ variables
  *
- * return: always 0
+ * Return: always 0
  */
 int env_func(void)
 {
