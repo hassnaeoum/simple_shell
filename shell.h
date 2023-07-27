@@ -23,7 +23,7 @@ void _puts(char *str);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t n);
 int _setenv(const char *name, const char *value, int overwrite);
-int _unsetenv(char *name);
+int _unsetenv(const char *name);
 int check_spaces_around_command(char *input);
 int check_spaces_tabs(char *str);
 int execute_cmd(char **av, char *buff);
